@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Main Page with Tree</title>
+  <style>
+    ul, #myUL {
+    list-style-type: none;
+    }
+
+    /* Remove margins and padding from the parent ul */
+    #myUL {
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Style the caret/arrow */
+    .caret {
+        cursor: pointer;
+        user-select: none; /* Prevent text selection */
+    }
+
+    /* Create the caret/arrow with a unicode, and style it */
+    .caret::before {
+        content: "*";
+        color: black;
+        display: inline-block;
+        margin-right: 6px;
+    }
+
+    /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+    .caret-down::before {
+        transform: rotate(90deg);
+    }
+
+    /* Hide the nested list */
+    .nested {
+        display: none;
+    }
+
+    /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+    .active {
+        display: block;
+    }
+  </style>
+</head>
+<body>
+  {% csrf_token %}
+
+  {% load mptt_tags %}
+  <ul id="myUL">
+    {% recursetree employees %}
+      <li>
+        {% if node.is_leaf_node %}
+            <span class="leaf">{{ node.name }}, Position - {{ node.employment_position }}, Salary - {{ node.salary }}</span>
+        {% else %}
+            <span class="caret parent">{{ node.name }}, Position - {{ node.employment_position }}, Salary - {{ node.salary }}</span>
+            <ul class="nested">
+                {{ children }}
+            </ul>
+        {% endif %}
+      </li>
+    {% endrecursetree %}
+  </ul>
+
+  <script>
+    var togglers = document.getElementsByClassName("caret");
+    var i;
+
+    for (i = 0; i < togglers.length; i++) {
+        togglers[i].addEventListener("click", function () {
+            this.parentElement.querySelector(".nested").classList.toggle("active");
+            this.classList.toggle("caret-down");
+        });
+    }
+  </script>
+</body>
+</html>
