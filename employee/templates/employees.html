@@ -42,27 +42,54 @@
     .active {
         display: block;
     }
+
+    /* Nestable */
+
+    .cf:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+    .dd { position: relative; display: block; margin: 0; padding: 0; max-width: 800px; list-style: none; font-size: 13px; line-height: 20px; margin-left: auto; margin-right: auto; }
+
+    .dd-handle { display: block; height: 30px; margin: 5px 0; padding: 5px 10px; color: #333; text-decoration: none; font-weight: bold; border: 1px solid #ccc;
+    background: #fafafa;
+    background: -webkit-linear-gradient(top, #fafafa 0%, #eee 100%);
+    background:    -moz-linear-gradient(top, #fafafa 0%, #eee 100%);
+    background:         linear-gradient(top, #fafafa 0%, #eee 100%);
+    -webkit-border-radius: 3px;
+            border-radius: 3px;
+    box-sizing: border-box; -moz-box-sizing: border-box;
+    }
+    .dd-handle:hover { color: #2ea8e5; background: #fff; }
+
+    .dd-item { display: block; position: relative; margin: 0; padding: 0; min-height: 20px; font-size: 13px; line-height: 20px; }
+
+    /* Nestable Extras */
+
+    .nestable-lists { display: block; clear: both; padding: 30px 0; width: 100%; border: 0; border-top: 2px solid #ddd; border-bottom: 2px solid #ddd; }
+
+
   </style>
 </head>
 <body>
   {% csrf_token %}
 
   {% load mptt_tags %}
-  <ul id="myUL">
-    {% recursetree employees %}
-      <li>
-        {% if node.is_leaf_node %}
-            <span class="leaf">{{ node.name }}, Position - {{ node.employment_position }}, Salary - {{ node.salary }}</span>
-        {% else %}
-            <span class="caret parent">{{ node.name }}, Position - {{ node.employment_position }}, Salary - {{ node.salary }}</span>
-            <ul class="nested">
-                {{ children }}
-            </ul>
-        {% endif %}
-      </li>
-    {% endrecursetree %}
-  </ul>
-
+  <div class="cf nestable-lists">
+    <div class="dd">
+      <ul id="myUL">
+        {% recursetree employees %}
+          <li class="dd-item">
+            {% if node.is_leaf_node %}
+                <div class="dd-handle">{{ node.name }}; Должность - {{ node.employment_position }}; Зарплата - {{ node.salary }}</div>
+            {% else %}
+                <span class="caret parent dd-handle">{{ node.name }}; Должность - {{ node.employment_position }}; Зарплата - {{ node.salary }}</span>
+                <ul class="nested">
+                    {{ children }}
+                </ul>
+            {% endif %}
+          </li>
+        {% endrecursetree %}
+      </ul>
+    </div>
+  </div>
   <script>
     var togglers = document.getElementsByClassName("caret");
     var i;
