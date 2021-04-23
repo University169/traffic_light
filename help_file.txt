@@ -2,8 +2,13 @@
 2. env\Scripts\activate
 3. pip3 install -r requirements.txt
 
-
 4. django-admin startproject traffic_light
 5. py manage.py startapp employee
 
 6. py manage.py runserver
+
+7. py manage.py makemigrations
+8. py manage.py migrate
+
+9. py manage.py createsuperuser
+admin/admin12345
