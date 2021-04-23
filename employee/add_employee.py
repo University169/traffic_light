@@ -38,7 +38,8 @@ def data_create(employment_position, subdivision, employee_salary):
 
 def run_random():
     count_one = 0
-    for i_one in range(1, 25):
+    #for i_one in range(1, 25):
+    for i_one in range(1, 2):
         count_one = count_one + 1
         print('count_one - ', count_one)
         current_subdivision = "Подразделение" + str(i_one)
@@ -52,12 +53,17 @@ def run_random():
             boss_level_1 = Employee.objects.get(id=current_child_id.id)
             boss_level_1.move_to(None, 'left')
             boss_level_1.save()
+            print('boss - ', boss_level_1)
+            print('child - ', boss_level_2)
+            print('boss_id - ', boss_level_1_id)
         except:
             print('some bad here 1')
 
-        for i_two in range(3):
+        #for i_two in range(3):
+        for i_two in range(1):
             try:
-                form = EmployeeForm(data=data_create(current_subdivision, "Руководитель среднего звена", random.choice(Salary_level_2)))
+                form = EmployeeForm(data=data_create(current_subdivision, "Руководитель среднего звена",
+                                                     random.choice(Salary_level_2)))
                 form.save()
                 current_child_len = Employee.objects.order_by('date_added')
                 current_child_id = current_child_len[(len(current_child_len) - 1)]
@@ -66,12 +72,13 @@ def run_random():
                 boss_level_1 = Employee.objects.get(id=boss_level_1_id)
                 boss_level_2.move_to(boss_level_1, 'first-child')
                 boss_level_2.save()
-                #print('boss - ', boss_level_1)
-                #print('child - ', boss_level_2)
+                print('boss - ', boss_level_1)
+                print('child - ', boss_level_2)
             except:
                 print('some bad here 2')
 
-            for i_three in range(3):
+            #for i_three in range(3):
+            for i_three in range(1):
                 try:
                     form = EmployeeForm(data=data_create(current_subdivision, "Опытный специалист", random.choice(Salary_level_3)))
                     form.save()
@@ -82,12 +89,13 @@ def run_random():
                     boss_level_2 = Employee.objects.get(id=boss_level_2_id)
                     boss_level_3.move_to(boss_level_2, 'first-child')
                     boss_level_3.save()
-                    #print('boss - ', boss_level_2)
-                    #print('child - ', boss_level_3)
+                    print('boss - ', boss_level_2)
+                    print('child - ', boss_level_3)
                 except:
                     print('some bad here 3')
 
-                for i_four in range(4):
+                #for i_four in range(4):
+                for i_four in range(1):
                     try:
                         form = EmployeeForm(data=data_create(current_subdivision, "Рядовой сотрудник", random.choice(Salary_level_4)))
                         form.save()
@@ -98,12 +106,13 @@ def run_random():
                         boss_level_3 = Employee.objects.get(id=boss_level_3_id)
                         boss_level_4.move_to(boss_level_3, 'first-child')
                         boss_level_4.save()
-                        #print('boss - ', boss_level_3)
-                        #print('child - ', boss_level_4)
+                        print('boss - ', boss_level_3)
+                        print('child - ', boss_level_4)
                     except:
                         print('some bad here 4')
 
-                    for i_five in range(5):
+                    #for i_five in range(5):
+                    for i_five in range(1):
                         try:
                             form = EmployeeForm(data=data_create(current_subdivision, "Стажер", random.choice(Salary_level_5)))
                             form.save()
@@ -113,10 +122,9 @@ def run_random():
                             boss_level_4 = Employee.objects.get(id=boss_level_4_id)
                             boss_level_5.move_to(boss_level_4, 'first-child')
                             boss_level_5.save()
-                            #print('boss - ', boss_level_4)
-                            #print('child - ', boss_level_5)
+                            print('boss - ', boss_level_4)
+                            print('child - ', boss_level_5)
                         except:
                             print('some bad here 5')
-
 
 run_random()
