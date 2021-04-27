@@ -12,3 +12,5 @@
 
 9. py manage.py createsuperuser
 admin/admin12345
+
+10. manage.py migrate --run-syncdb
