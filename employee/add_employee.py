@@ -53,7 +53,8 @@ def data_create(employment_position, subdivision, employee_salary):
 
 def run_random():
     count_one = 0
-    for i_one in range(1, 2):
+    n = 25
+    for i_one in range(1, n + 1):
         count_one += 1
         print('count_1_lvl - ', count_one)
         current_subdivision = "Подразделение " + str(i_one)
