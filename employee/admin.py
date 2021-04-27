@@ -1,9 +1,7 @@
 from django.contrib import admin
 from . models import Employee
 
-# uncomment for add employee
+# uncomment for add 25000 employee
 # from . import add_employee
-
-# Register your models here.
 
 admin.site.register(Employee)
