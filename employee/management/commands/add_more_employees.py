@@ -1,3 +1,4 @@
+from django.core.management.base import BaseCommand
 from employee.models import Employee
 from employee.forms import EmployeeForm
 import random
