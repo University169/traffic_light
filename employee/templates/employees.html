@@ -83,9 +83,9 @@
         {% recursetree employees %}
           <li class="dd-item">
             {% if node.is_leaf_node %}
-                <div class="dd-handle">{{ node.name }}; {{ node.subdivision }}; Должность - {{ node.employment_position }}; Зарплата - {{ node.salary }}</div>
+                <div class="dd-handle">{{ node.name }}; Подразделение - {{ node.subdivision }}; Должность - {{ node.employment_position }}; Зарплата - {{ node.salary }}</div>
             {% else %}
-                <span class="caret parent dd-handle">{{ node.name }}; {{ node.subdivision }}; Должность - {{ node.employment_position }}; Зарплата - {{ node.salary }}</span>
+                <span class="caret parent dd-handle">{{ node.name }}; Подразделение - {{ node.subdivision }}; Должность - {{ node.employment_position }}; Зарплата - {{ node.salary }}</span>
                 <ul class="nested">
                     {{ children }}
                 </ul>
