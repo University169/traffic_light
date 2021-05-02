@@ -5,7 +5,8 @@ from mptt.models import MPTTModel, TreeForeignKey
 
 
 class Employee(MPTTModel):
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50)
+    tax_id_inn = models.CharField(max_length=12, unique=True)
     subdivision = models.CharField(max_length=200)
     employment_position = models.CharField(max_length=200)
     employment_start_date = models.DateTimeField(auto_now_add=False)

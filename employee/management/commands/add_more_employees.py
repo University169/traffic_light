@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from employee.models import Employee
 from employee.forms import EmployeeForm
+import string
 import random
 from django.core.files import File
 
@@ -37,10 +38,12 @@ class Command(BaseCommand):
         def data_create(subdivision, employment_position, employee_salary):
             First = random.choice(surname_lst)
             Last = f'{random.choice(alphabet)}. {random.choice(alphabet)}.'
+            tax_id_inn = ''.join(random.choices(string.digits, k=12))
             Employee_Year = random.choice(Year)
             Employee_Month = random.choice(Month)
             Employee_Day = random.choice(Day)
             dict_with_data = {'name': First + ' ' + Last,
+                              'tax_id_inn': tax_id_inn,
                               'subdivision': subdivision,
                               'employment_position': employment_position,
                               'employment_start_date': Employee_Year + '-' + Employee_Month + '-' + Employee_Day,
