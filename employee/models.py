@@ -18,7 +18,7 @@ class Subdivision(MPTTModel):
         order_insertion_by = ['subdivision_name']
 
 
-class Position(MPTTModel):
+class Position(models.Model):
     # должности
     # здесь нет иерархии, это просто перечень возможных должностей для того или иного подразделения
     # создавая должность мы ей выбираем в качестве родителя подразделение из модели Subdivision
@@ -30,7 +30,7 @@ class Position(MPTTModel):
         return 'Dolzhnost: ' + self.employment_position
 
 
-class Persone(MPTTModel):
+class Persone(models.Model):
     # здесь нет иерархии, тут указываются личные данные человека
     # а в качестве родителя указывается конкретная должность из модели Position
     name = models.CharField(max_length=50)
