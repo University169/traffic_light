@@ -12,7 +12,7 @@ class Subdivision(MPTTModel):
     parent = TreeForeignKey('self', on_delete=models.CASCADE,
                             null=True, blank=True, related_name='children_subdivision')
     def __str__(self):
-        return 'Podrazdelenie: ' + self.subdivision_name
+        return f'Podrazdelenie: {self.subdivision_name}'
 
     class MPTTMeta:
         order_insertion_by = ['subdivision_name']
@@ -24,10 +24,10 @@ class Position(models.Model):
     # создавая должность мы ей выбираем в качестве родителя подразделение из модели Subdivision
     employment_position = models.CharField(max_length=200)
     salary = models.IntegerField()
-    parent = models.ForeignKey(Subdivision, on_delete=models.CASCADE, related_name='children_position')
+    parent = TreeForeignKey(Subdivision, on_delete=models.CASCADE, related_name='children_position')
 
     def __str__(self):
-        return 'Dolzhnost: ' + self.employment_position
+        return f'{self.parent}; Dolzhnost: {self.employment_position}'
 
 
 class Persone(models.Model):
