@@ -1,5 +1,10 @@
 from django.contrib import admin
-from . models import Employee
+
+# Register your models here.
+from . models import Persone, Subdivision, Position
 
 
-admin.site.register(Employee)
+admin.site.register(Persone)
+admin.site.register(Subdivision)
+admin.site.register(Position)
+
