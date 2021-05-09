@@ -38,9 +38,9 @@ class Persone(models.Model):
     name = models.CharField(max_length=50, null=True, blank=True)
     tax_id_inn = models.CharField(max_length=12, unique=True)
     employment_start_date = models.DateTimeField(auto_now_add=False)
-    employee_position = models.ForeignKey(Position, on_delete=models.CASCADE, null=True,
+    employee_position = models.ForeignKey(Position, on_delete=models.SET_NULL, null=True,
                                blank=True, related_name='children_position')
-    employee_subdivision = TreeForeignKey(Subdivision, on_delete=models.CASCADE, null=True,
+    employee_subdivision = TreeForeignKey(Subdivision, on_delete=models.SET_NULL, null=True,
                                blank=True, related_name='children_subdivision')
 
     def __str__(self):
