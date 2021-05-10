@@ -1,2 +1,3 @@
 Django
 django-mptt
+django-debug-toolbar

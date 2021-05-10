@@ -6,9 +6,7 @@ from .models import Subdivision, Position, Persone
 
 
 def show_subdivisions(request):
-    global subdivisions, positions,persons
-    subdivisions = Subdivision.objects.all().prefetch_related('children_subdivision').filter(level__lte=5)
-    positions = Position.objects.all()
-    persons = Persone.objects.all()
-    context = {'subdivisions': subdivisions, 'positions': positions, 'persons': persons}
+    global subdivisions
+    subdivisions = Subdivision.objects.prefetch_related('children_subdivision')
+    context = {'subdivisions': subdivisions}
     return render(request, "subdivisions.html", context)
